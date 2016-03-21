@@ -1,11 +1,14 @@
 package com.example.alexeykhatskevich.track_android_1;
 
 public class NumberToTextConverter {
-    static final int max_value = 1000000 - 1;
+    public static final int max_value = 1000000 - 1;
 
-    static String convert(int num) {
+    public static String convert(int num) {
         if (num == 0) {
             return "ноль";
+        }
+        if (num > max_value){
+            return "очень много";
         }
         String thousands = generateThousands(num);
         String lte_thousands = generateLessThenThousands(num);
@@ -42,14 +45,14 @@ public class NumberToTextConverter {
         }
         ret_val = generate3exponent(thousands_count);
         if (getParticularExponent(num, 4) == 1) {
-            return ret_val + " " + generateFrom10To19(thousands_count) + " тысячь";
+            return ret_val + " " + generateFrom10To19(thousands_count) + " тысяч";
         } else {
-            ret_val = ret_val + " " + generate2exponent(num) + " " + generate1exponent(num);
+            ret_val = ret_val + " " + generate2exponent(thousands_count) + " " + generate1exponentFS(thousands_count);
             int exponent3 = getParticularExponent(num, 3);
             if (exponent3 == 1)
                 ret_val = ret_val + " тысяча";
             if (exponent3 == 2 || exponent3 == 3 || exponent3 == 4)
-                ret_val = ret_val + " тысяча";
+                ret_val = ret_val + " тысячи";
 
             if (exponent3 >= 5)
                 ret_val = ret_val + " тысяч";
@@ -82,6 +85,18 @@ public class NumberToTextConverter {
                 return "девять";
         }
         return "";
+    }
+
+    private static String generate1exponentFS(int num) {
+        int exponent = getParticularExponent(num, 0);
+        switch (exponent) {
+            case 1:
+                return "одна";
+            case 2:
+                return "две";
+            default:
+                return generate1exponent(num);
+        }
     }
 
     private static String generateFrom10To19(int num) {
