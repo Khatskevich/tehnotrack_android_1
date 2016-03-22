@@ -3,14 +3,23 @@ package com.example.alexeykhatskevich.track_android_1;
 import android.content.Context;
 
 public class NumberToTextConverter {
-    public static final int max_value = 1000000 - 1;
+    public static final int max_value = 1000000;
 
     public static String convert(Context context, int num) {
+
+
+        if (num < 0) {
+            return "";
+        }
+
         if (num == 0) {
             return context.getString(R.string.description_null);
         }
         if (num > max_value){
             return context.getString(R.string.description_very_mytch);
+        }
+        if (num == 1000000){
+            return context.getString(R.string.description_million);
         }
         String thousands = generateThousands(context, num);
         String lte_thousands = generateLessThenThousands(context, num);

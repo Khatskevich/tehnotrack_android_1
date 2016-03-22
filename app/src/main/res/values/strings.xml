@@ -44,4 +44,5 @@
     <string name="description_seven_hundred">семьсот</string>
     <string name="description_eight_hundred">восемьсот</string>
     <string name="description_nine_hundred">девятьсот</string>
+    <string name="description_million">миллион</string>
 </resources>
