@@ -10,10 +10,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".FirstActivity"
-            android:label="@string/action_bar_label_text">
+            android:label="@string/action_bar_label_text"
+            android:theme="@style/AppThemeNoActionBar">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

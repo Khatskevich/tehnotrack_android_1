@@ -1,24 +1,26 @@
 package com.example.alexeykhatskevich.track_android_1;
 
+import android.content.Context;
+
 public class NumberToTextConverter {
     public static final int max_value = 1000000 - 1;
 
-    public static String convert(int num) {
+    public static String convert(Context context, int num) {
         if (num == 0) {
-            return "ноль";
+            return context.getString(R.string.description_null);
         }
         if (num > max_value){
-            return "очень много";
+            return context.getString(R.string.description_very_mytch);
         }
-        String thousands = generateThousands(num);
-        String lte_thousands = generateLessThenThousands(num);
+        String thousands = generateThousands(context, num);
+        String lte_thousands = generateLessThenThousands(context, num);
         if (thousands.length() == 0 || lte_thousands.length() == 0)
             return thousands + lte_thousands;
         else
             return thousands + " " + lte_thousands;
     }
 
-    static String generateLessThenThousands(int num) {
+    static String generateLessThenThousands(Context context,int num) {
         num = getParticularExponent(num, 2) * 100 +
                 getParticularExponent(num, 1) * 10 +
                 getParticularExponent(num, 0);
@@ -26,16 +28,16 @@ public class NumberToTextConverter {
         if (num == 0) {
             return ret_val;
         }
-        ret_val = generate3exponent(num);
+        ret_val = generate3exponent(context, num);
         if (getParticularExponent(num, 1) == 1) {
-            return ret_val + " " + generateFrom10To19(num);
+            return ret_val + " " + generateFrom10To19(context, num);
         } else {
-            ret_val = ret_val + " " + generate2exponent(num) + " " + generate1exponent(num);
+            ret_val = ret_val + " " + generate2exponent(context, num) + " " + generate1exponent(context, num);
             return ret_val;
         }
     }
 
-    static String generateThousands(int num) {
+    static String generateThousands(Context context, int num) {
         int thousands_count = getParticularExponent(num, 5) * 100 +
                 getParticularExponent(num, 4) * 10 +
                 getParticularExponent(num, 3);
@@ -43,134 +45,134 @@ public class NumberToTextConverter {
         if (thousands_count == 0) {
             return ret_val;
         }
-        ret_val = generate3exponent(thousands_count);
+        ret_val = generate3exponent(context, thousands_count);
         if (getParticularExponent(num, 4) == 1) {
-            return ret_val + " " + generateFrom10To19(thousands_count) + " тысяч";
+            return ret_val + " " + generateFrom10To19(context, thousands_count) + " " + context.getString(R.string.description_thousands_after_5_6_7_8_9_russian);
         } else {
-            ret_val = ret_val + " " + generate2exponent(thousands_count) + " " + generate1exponentFS(thousands_count);
+            ret_val = ret_val + " " + generate2exponent(context, thousands_count) + " " + generate1exponentFS(context, thousands_count);
             int exponent3 = getParticularExponent(num, 3);
             if (exponent3 == 1)
-                ret_val = ret_val + " тысяча";
+                ret_val = ret_val + " " + context.getString(R.string.description_thousands_after_1_russian);
             if (exponent3 == 2 || exponent3 == 3 || exponent3 == 4)
-                ret_val = ret_val + " тысячи";
+                ret_val = ret_val + " " + context.getString(R.string.description_thousands_after_2_3_4_russian);
 
             if (exponent3 >= 5)
-                ret_val = ret_val + " тысяч";
+                ret_val = ret_val + " " + context.getString(R.string.description_thousands_after_5_6_7_8_9_russian);
             return ret_val;
         }
     }
 
-    private static String generate1exponent(int num) {
+    private static String generate1exponent(Context context,int num) {
         int exponent = getParticularExponent(num, 0);
         switch (exponent) {
             case 0:
                 return "";
             case 1:
-                return "один";
+                return context.getString(R.string.description_one);
             case 2:
-                return "два";
+                return context.getString(R.string.description_two);
             case 3:
-                return "три";
+                return context.getString(R.string.description_three);
             case 4:
-                return "четыре";
+                return context.getString(R.string.description_four);
             case 5:
-                return "пять";
+                return context.getString(R.string.description_five);
             case 6:
-                return "шесть";
+                return context.getString(R.string.description_six);
             case 7:
-                return "семь";
+                return context.getString(R.string.description_seven);
             case 8:
-                return "восемь";
+                return context.getString(R.string.description_eight);
             case 9:
-                return "девять";
+                return context.getString(R.string.description_nine);
         }
         return "";
     }
 
-    private static String generate1exponentFS(int num) {
+    private static String generate1exponentFS(Context context,int num) {
         int exponent = getParticularExponent(num, 0);
         switch (exponent) {
             case 1:
-                return "одна";
+                return context.getString(R.string.description_one_female);
             case 2:
-                return "две";
+                return context.getString(R.string.description_two_female);
             default:
-                return generate1exponent(num);
+                return generate1exponent(context, num);
         }
     }
 
-    private static String generateFrom10To19(int num) {
+    private static String generateFrom10To19(Context context,int num) {
         num = getParticularExponent(num, 1) * 10 +
                 getParticularExponent(num, 0) * 1;
         switch (num) {
             case 10:
-                return "десять";
+                return context.getString(R.string.description_ten);
             case 11:
-                return "одиннадцать";
+                return context.getString(R.string.description_eleven);
             case 12:
-                return "двенадцать";
+                return context.getString(R.string.description_twelve);
             case 13:
-                return "тринадцать";
+                return context.getString(R.string.description_thirteen);
             case 14:
-                return "четырнадцать";
+                return context.getString(R.string.description_fourteen);
             case 15:
-                return "пятнадцать";
+                return context.getString(R.string.description_fifteen);
             case 16:
-                return "шестнадцать";
+                return context.getString(R.string.description_sixteen);
             case 17:
-                return "семнадцать";
+                return context.getString(R.string.description_seventeen);
             case 18:
-                return "восемнадцать";
+                return context.getString(R.string.description_eighteen);
             case 19:
-                return "девятнадцать";
+                return context.getString(R.string.description_nineteen);
         }
         return "";
     }
 
-    private static String generate2exponent(int num) {
+    private static String generate2exponent(Context context,int num) {
         num = getParticularExponent(num, 1);
         switch (num) {
             case 2:
-                return "двадцать";
+                return context.getString(R.string.description_twenty);
             case 3:
-                return "тридцать";
+                return context.getString(R.string.description_thirty);
             case 4:
-                return "сорок";
+                return context.getString(R.string.description_forty);
             case 5:
-                return "пятьдесят";
+                return context.getString(R.string.description_fifty);
             case 6:
-                return "шестьдесят";
+                return context.getString(R.string.description_sixty);
             case 7:
-                return "семдесят";
+                return context.getString(R.string.description_seventy);
             case 8:
-                return "восемьдесят";
+                return context.getString(R.string.description_eighty);
             case 9:
-                return "девяносто";
+                return context.getString(R.string.description_ninety);
         }
         return "";
     }
 
-    private static String generate3exponent(int num) {
+    private static String generate3exponent(Context context,int num) {
         int exponent = getParticularExponent(num, 2);
         switch (exponent) {
             case 1:
-                return "сто";
+                return context.getString(R.string.description_one_hundred);
             case 2:
-                return "двести";
+                return context.getString(R.string.description_two_hundred);
             case 3:
-                return "триста";
+                return context.getString(R.string.description_three_hundred);
             case 4:
-                return "четыреста";
+                return context.getString(R.string.description_four_hundred);
             case 5:
-                return "пятьсот";
+                return context.getString(R.string.description_five_hundred);
             case 6:
-                return "шестьсот";
+                return context.getString(R.string.description_six_hundred);
             case 7:
-                return "семьсот";
+                return context.getString(R.string.description_seven_hundred);
             case 8:
-                return "восемьсот";
+                return context.getString(R.string.description_eight_hundred);
             case 9:
-                return "девятьсот";
+                return context.getString(R.string.description_nine_hundred);
         }
         return "";
     }
