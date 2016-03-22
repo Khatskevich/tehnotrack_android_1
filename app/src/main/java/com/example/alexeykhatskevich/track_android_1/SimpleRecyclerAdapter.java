@@ -29,6 +29,12 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
         holder.setText(NumberToTextConverter.convert(position));
+        if (position%2==0){
+            holder.setBGColorById(R.color.grey);
+        }else{
+            holder.setBGColorById(R.color.black);
+        }
+
     }
 
     @Override

@@ -156,7 +156,7 @@ public class NumberToTextConverter {
             case 1:
                 return "сто";
             case 2:
-                return "двесте";
+                return "двести";
             case 3:
                 return "триста";
             case 4:
