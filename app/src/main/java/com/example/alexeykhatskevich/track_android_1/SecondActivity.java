@@ -11,12 +11,13 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRecyclerView = new RecyclerView(this);
+        setContentView(R.layout.activity_second);
+        mRecyclerView = (RecyclerView)findViewById(R.id.second_activity_recycler_view);
 
-        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(getLayoutInflater()));
+        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(getLayoutInflater(), getApplicationContext()));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mRecyclerView.setHasFixedSize(true);
-        setContentView(mRecyclerView);
+
     }
 }
