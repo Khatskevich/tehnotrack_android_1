@@ -49,6 +49,9 @@ public class FragmentTechnology extends Fragment {
     public static FragmentTechnology newInstance(int position) {
         FragmentTechnology technologyDetailFragment = new FragmentTechnology();
         technologyDetailFragment.position = position;
+        Bundle args = new Bundle();
+        args.putInt("position", position);
+        technologyDetailFragment.setArguments(args);
         return technologyDetailFragment;
 
     }
