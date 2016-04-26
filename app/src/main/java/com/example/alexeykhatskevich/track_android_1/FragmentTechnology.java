@@ -4,9 +4,6 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +23,9 @@ public class FragmentTechnology extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_technology_view, container, false);
-
+        if (savedInstanceState!=null){
+            position = savedInstanceState.getInt("position",position);
+        }
         mText = (TextView)rootView.findViewById(R.id.textView);
         imageView = (ImageView)rootView.findViewById(R.id.imageView);
         final Technology technology = TechnologyRecyclerAdapter.technologies.get(position);
@@ -54,4 +53,9 @@ public class FragmentTechnology extends Fragment {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("position", position);
+    }
 }

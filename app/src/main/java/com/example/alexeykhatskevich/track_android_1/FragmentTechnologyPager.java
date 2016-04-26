@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FragmentTechnologyPager extends Fragment {
+    public int startPage = 0;
     private ViewPager mPager;
     private FragmentViewPagerAdapter mPagerAdapter;
 
@@ -17,7 +18,7 @@ public class FragmentTechnologyPager extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View contentView = inflater.inflate(R.layout.fragment_technologies_recycler, container, false);
+        View contentView = inflater.inflate(R.layout.fragment_pager, container, false);
         setUpViewPager(contentView);
         return contentView;
     }
@@ -26,6 +27,7 @@ public class FragmentTechnologyPager extends Fragment {
         mPager = (ViewPager) contentView.findViewById(R.id.pager);
         mPagerAdapter = new FragmentViewPagerAdapter(getChildFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        mPager.setCurrentItem(startPage);
     }
 
     private class FragmentViewPagerAdapter extends FragmentStatePagerAdapter {

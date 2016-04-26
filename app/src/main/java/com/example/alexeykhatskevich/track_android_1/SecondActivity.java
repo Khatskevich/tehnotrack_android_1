@@ -14,6 +14,17 @@ public class SecondActivity extends AppCompatActivity {
             Fragment technologiesFragment = new FragmentTechnologyRecycler();
             getSupportFragmentManager().beginTransaction().add(R.id.activity_second_content_container, technologiesFragment).commit();
         }
+    }
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
 
     }
 }

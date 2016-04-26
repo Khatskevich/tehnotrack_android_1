@@ -4,6 +4,7 @@ package com.example.alexeykhatskevich.track_android_1;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +45,12 @@ public class TechnologyRecyclerAdapter extends RecyclerView.Adapter<TechnologyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new FragmentTechnology();
-                fragmentManager.beginTransaction().
-                        replace(R.id.activity_second_content_container, fragment).commit();
+                FragmentTechnologyPager fragment = new FragmentTechnologyPager();
+                fragment.startPage = position;
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.activity_second_content_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
                 holder.fillWithTechnology(technologies.get(position));
