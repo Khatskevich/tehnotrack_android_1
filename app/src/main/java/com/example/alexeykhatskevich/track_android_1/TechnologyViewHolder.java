@@ -42,10 +42,15 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder {
         fillWithTechnology(technology);
     }
     public synchronized void fillWithTechnology(final Technology technology){
-        setText(technology.title);
-        imageView.setImageBitmap(null);
         if (imageDownloadTask!=null){
             imageDownloadTask.cancel(true);
+        }
+        setText(technology.title);
+        imageView.setImageBitmap(null);
+        Bitmap image = technology.getImageFromCache();
+        if ( image != null){
+            imageView.setImageBitmap(image);
+            return;
         }
         imageDownloadTask = new AsyncTask() {
             Bitmap image;

@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class Technology {
 
-    private static LruCache<String,Bitmap> sharedImageCache = new LruCache<>(1024*10);
+    private static LruCache<String,Bitmap> sharedImageCache = new LruCache<>(1024*1000);
 
     public static String ARG_TECHNOLOGY = "technology";
     private static String ARG_PICTURE_URL = "picture";
@@ -20,6 +20,11 @@ public class Technology {
 
     private String pictureUrl;
     public String title;
+
+    public String getInfo() {
+        return info;
+    }
+
     private String info;
 
     public Technology(JSONObject jsonData){

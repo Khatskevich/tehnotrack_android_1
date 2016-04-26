@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     android:id="@+id/second_activity_layout"
     tools:context="com.example.alexeykhatskevich.track_android_1.SecondActivity">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/second_activity_recycler_view"
+    <FrameLayout
+        android:id="@+id/activity_second_content_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"/>
 </RelativeLayout>
